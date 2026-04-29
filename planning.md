@@ -204,7 +204,7 @@
 
 ### What was shipped
 
-- **Stack**: Next.js 16.2.4 + React 19.2.4 + Tailwind v4 + TypeScript, all under `web/`.
+- **Stack**: Next.js 16.2.4 + React 19.2.4 + Tailwind v4 + TypeScript, all under the repo root.
 - **Design system**: OKLCH color tokens, 7-recipe gradient library (Twilight, Cinder, Ocean Glass, Aurora, Graphite, Ember Halo, Mint Drift), 3-font typography stack (Fraunces display + Inter body + JetBrains Mono labels), motion tokens, editorial shadow scale.
 - **18 routes**: home, products index, four product detail pages (SSG), pricing, about, ROI calculator, integrations, waitlist (multi-step form), apply (tier-aware), 404, privacy, terms, sitemap, robots.
 - **Custom graphics, zero emoji**: bespoke logo mark, four product marks, hero composition (layered SVG depth + atmospheric blobs + orbital lines), stylized product mockup illustration with three-tier proposal (not a screenshot).
@@ -229,7 +229,7 @@ Four new skills authored at `~/.agents/skills/` and symlinked to `~/.claude/skil
 
 ### To launch
 
-1. `cd web && pnpm install && pnpm dev` — open http://localhost:3000.
+1. `pnpm install && pnpm dev` from the repo root — open http://localhost:3000.
 2. `pnpm build && pnpm start` — production preview.
 3. Wire `/waitlist` and `/apply` forms to a backend (Resend + Neon recommended) before public launch.
 4. Replace `metadataBase` in `src/app/layout.tsx` with the real production domain.

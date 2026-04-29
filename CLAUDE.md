@@ -8,3 +8,5 @@ Additionally, find skills associated with:
 - finding optimal stock imagery
 - editing and modifying the stock images to make them look professional
 The end result should be a billion-dollar technology company website that is comparable with Asana, Notion, Monday.com, Click Up, Trello, and various other high-quality professional websites.
+
+@AGENTS.md

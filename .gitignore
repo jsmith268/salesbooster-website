@@ -1,14 +1,18 @@
 # Dependencies
-node_modules/
-.pnp
-.pnp.js
-.yarn/install-state.gz
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
 
 # Builds
-.next/
-out/
-build/
-dist/
+/.next/
+/out/
+/build
+/dist
 
 # Logs
 *.log
@@ -20,10 +24,12 @@ yarn-error.log*
 # Env / secrets
 .env
 .env.local
+.env*.local
 .env.development.local
 .env.test.local
 .env.production.local
-.env*.local
+.env*
+!.env.example
 
 # Editor / OS
 .DS_Store
@@ -31,23 +37,21 @@ Thumbs.db
 .vscode/*
 !.vscode/extensions.json
 .idea/
+*.pem
 
-# Testing
-coverage/
-
-# Next.js
-next-env.d.ts
+# Vercel / Turbo
 .vercel
-
-# Turbo / Vercel cache
 .turbo/
 
 # TypeScript
 *.tsbuildinfo
+next-env.d.ts
 
-# Misc
-*.pem
+# Test coverage
+coverage/
+
+# pnpm store
 .pnpm-store/
 
-# Project-specific (not needed in repo)
+# Project-specific (Claude Code session data — not for repo)
 .claude/projects/

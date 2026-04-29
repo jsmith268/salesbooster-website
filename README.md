@@ -18,31 +18,35 @@ The site is in design-partner mode: every primary CTA drives to a waitlist or an
 
 ## Repository layout
 
+The Next.js app lives at the repo root for one-click Vercel deploys.
+
 ```
 .
-├── web/                       # The deployable Next.js app — Vercel root directory
-│   ├── src/
-│   │   ├── app/               # App Router routes (home, products, pricing, about, roi, integrations, waitlist, apply, legal)
-│   │   ├── components/        # site/, ui/, marks/, forms/
-│   │   └── lib/               # site-config (single source of truth for content), utils
-│   ├── public/
-│   └── package.json
-├── skills/                    # Claude Code skills used during build (design system + voice + graphics)
+├── src/                       # Application code
+│   ├── app/                   # App Router routes (home, products, pricing, about, roi, integrations, waitlist, apply, legal)
+│   ├── components/            # site/, ui/, marks/, forms/
+│   └── lib/                   # site-config (single source of truth for content), utils
+├── public/                    # Static assets
+├── package.json
+├── next.config.ts
+├── tsconfig.json
+├── postcss.config.mjs
+├── components.json            # shadcn config
+├── skills/                    # Claude Code skills used during build (excluded from build)
 ├── initial-website-draft/     # Original single-file JSX prototype, kept for reference
 ├── planning.md                # Phased build plan + completion notes
 └── README.md
 ```
 
+`skills/` and `initial-website-draft/` are excluded from the TypeScript build (`tsconfig.json`) and have no impact on the deployed site.
+
 ---
 
 ## Local development
 
-The app lives under `web/`.
-
 ```bash
-cd web
 pnpm install
-pnpm dev          # starts on http://localhost:3000 (or pass --port 3010 to avoid conflicts)
+pnpm dev          # starts on http://localhost:3000 (use --port 3010 to avoid conflicts)
 ```
 
 Production build:
@@ -57,12 +61,13 @@ pnpm start
 ## Deploying to Vercel
 
 1. Import this repository on [vercel.com/new](https://vercel.com/new).
-2. **Root Directory** → set to `web`. Vercel will autodetect Next.js.
-3. **Build & Output**: leave defaults (`pnpm build`, `.next`).
-4. **Environment Variables**: none required for v1. Form handlers in `/waitlist` and `/apply` are placeholder client-side stubs — wire to a backend (Resend + Neon recommended) in a follow-up commit.
-5. **Domain**: assign once the deploy is green.
+2. **Framework Preset**: Next.js (auto-detected — the app is at the repo root).
+3. **Root Directory**: leave as `./` (default).
+4. **Build & Output**: defaults are correct (`next build`, `.next`).
+5. **Environment Variables**: none required for v1. Form handlers in `/waitlist` and `/apply` are placeholder client-side stubs — wire to a backend (Resend + Neon recommended) in a follow-up commit.
+6. **Domain**: assign once the deploy is green.
 
-Once **Root Directory** is set to `web`, Vercel reads `web/package.json` directly — no `vercel.json` is needed for this project.
+No `vercel.json` or special config needed. Vercel detects Next.js from `package.json`.
 
 ---
 
