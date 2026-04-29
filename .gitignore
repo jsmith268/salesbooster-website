@@ -1,0 +1,53 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# Builds
+.next/
+out/
+build/
+dist/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Env / secrets
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env*.local
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Testing
+coverage/
+
+# Next.js
+next-env.d.ts
+.vercel
+
+# Turbo / Vercel cache
+.turbo/
+
+# TypeScript
+*.tsbuildinfo
+
+# Misc
+*.pem
+.pnpm-store/
+
+# Project-specific (not needed in repo)
+.claude/projects/
