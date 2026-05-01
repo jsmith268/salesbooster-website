@@ -9,8 +9,9 @@ import { Reveal } from "@/components/ui/reveal";
 import { ProductIcon } from "@/components/marks/product-icon";
 import { ProductGrid } from "@/components/site/product-grid";
 import { CTABanner } from "@/components/site/cta-banner";
+import { HowItWorks } from "@/components/site/how-it-works";
+import type { ProductSlug } from "@/components/site/how-it-works/graphics";
 import { PRODUCTS } from "@/lib/site-config";
-import { Check } from "lucide-react";
 
 type Slug =
   | "sales-booster"
@@ -121,7 +122,7 @@ export default async function ProductPage({
               </Reveal>
             </div>
 
-            {/* Big metric callout */}
+            {/* Outcome + mechanism callout */}
             <Reveal delay={300} className="hidden lg:block">
               <div
                 className="relative rounded-[var(--radius-xl)] p-10 backdrop-blur-md"
@@ -135,20 +136,28 @@ export default async function ProductPage({
                   className="h-14 w-14"
                   tone="on-dark"
                 />
-                <div
-                  className="mt-7 font-display font-semibold tracking-[-0.04em]"
-                  style={{
-                    fontSize: "clamp(4rem, 8vw, 7rem)",
-                    lineHeight: 0.92,
-                    color: hue,
-                  }}
-                >
-                  {product.metric}
-                </div>
-                <p className="mt-3 font-display text-xl tracking-[-0.02em]">
-                  {product.metricLabel}
+                <p className="mt-7 font-mono text-xs uppercase tracking-wider text-[var(--ink-on-dark-muted)]">
+                  Outcome
                 </p>
-                <p className="mt-1 font-mono text-xs uppercase tracking-wider text-[var(--ink-on-dark-muted)]">
+                <div className="mt-2 flex items-baseline gap-3 flex-wrap">
+                  <span
+                    className="font-display font-semibold tracking-[-0.035em]"
+                    style={{
+                      fontSize: "clamp(2.25rem, 4vw, 3.5rem)",
+                      lineHeight: 0.96,
+                      color: hue,
+                    }}
+                  >
+                    {product.metric}
+                  </span>
+                  <span className="font-display text-2xl tracking-[-0.02em] text-[var(--ink-on-dark)]">
+                    {product.metricLabel}
+                  </span>
+                </div>
+                <p className="mt-5 text-[var(--ink-on-dark-muted)] text-pretty leading-relaxed">
+                  {product.mechanism}
+                </p>
+                <p className="mt-5 pt-5 border-t border-[oklch(1_0_0_/_0.1)] font-mono text-xs uppercase tracking-wider text-[var(--ink-on-dark-muted)]">
                   {product.setup}
                 </p>
               </div>
@@ -156,36 +165,17 @@ export default async function ProductPage({
           </div>
         </header>
 
-        {/* Features grid */}
+        {/* How it works — interactive, vertically-stacked walkthrough */}
         <Section tone="light">
           <div className="container-page">
-            <Reveal>
-              <SectionHeader
-                eyebrow={`${product.name} · what's inside`}
-                title={`What ${product.name} actually does.`}
-              />
-            </Reveal>
-            <div className="mt-16 grid gap-4 sm:grid-cols-2">
-              {product.features.map((f, i) => (
-                <Reveal key={f} delay={i * 60}>
-                  <div className="flex items-start gap-4 p-6 rounded-[var(--radius-lg)] bg-[var(--bg)] border border-[var(--border)] hover:border-[var(--ink)] transition-colors">
-                    <span
-                      className="grid h-10 w-10 place-items-center rounded-[var(--radius)] shrink-0"
-                      style={{
-                        background: `color-mix(in oklch, ${hue} 14%, transparent)`,
-                      }}
-                    >
-                      <Check className="h-5 w-5" style={{ color: hue }} strokeWidth={2.5} />
-                    </span>
-                    <div>
-                      <h3 className="font-display text-lg font-semibold tracking-[-0.015em]">
-                        {f}
-                      </h3>
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
+            <HowItWorks
+              slug={product.slug as ProductSlug}
+              hue={hue}
+              steps={product.valueProps}
+              eyebrow={`${product.name} · how it works`}
+              title={product.valuePropsTitle}
+              description={product.valuePropsDescription}
+            />
           </div>
         </Section>
 

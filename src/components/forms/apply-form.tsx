@@ -69,7 +69,7 @@ export function ApplyForm({ tier }: { tier: Tier }) {
 
       <div className="pt-2">
         <Button type="submit" size="lg" variant="primary" className="w-full sm:w-auto">
-          {tier === "enterprise" ? "Request founding-customer review" : "Submit my application"}
+          {tier === "enterprise" ? "Request launch-partner review" : "Submit my application"}
         </Button>
         <p className="mt-3 text-xs text-[var(--ink-subtle)]">
           Reviewed weekly. We come back with an answer either way.

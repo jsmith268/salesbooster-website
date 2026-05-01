@@ -17,9 +17,12 @@ export function Timeline() {
       <ol className="space-y-20 md:space-y-32 list-none p-0 m-0">
         {TIMELINE.map((step, i) => (
           <Reveal key={step.num} delay={i * 60} as="li">
-            <div className="relative" aria-label={`Step ${step.num} — ${step.stage}`}>
+            <div
+              className="relative md:pt-14"
+              aria-label={`Step ${step.num} — ${step.stage}`}
+            >
               {/* Stage label band */}
-              <div className="md:absolute md:left-1/2 md:-translate-x-1/2 md:-top-3 inline-flex items-center gap-3 mb-8 md:mb-0 px-3 py-1.5 rounded-full bg-[var(--bg)] border border-[var(--border-strong)]">
+              <div className="md:absolute md:left-1/2 md:-translate-x-1/2 md:top-0 md:-translate-y-1/2 inline-flex items-center gap-3 mb-8 md:mb-0 px-3 py-1.5 rounded-full bg-[var(--bg)] border border-[var(--border-strong)] md:z-10">
                 <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--ink-subtle)]">
                   {step.num}
                 </span>
@@ -28,7 +31,7 @@ export function Timeline() {
                 </span>
               </div>
 
-              <div className="grid md:grid-cols-2 md:gap-16 gap-5 mt-6 md:mt-12">
+              <div className="grid md:grid-cols-2 md:gap-16 gap-5">
                 {/* Without — left, sunken, muted */}
                 <div className="md:pr-2 md:text-right">
                   <div className="inline-block md:block max-w-md md:max-w-none md:ml-auto p-7 rounded-[var(--radius-lg)] bg-[var(--bg-sunken)] border border-[var(--border)]">

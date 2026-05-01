@@ -5,10 +5,18 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { BrandLockup, LogoMark, Wordmark } from "@/components/marks/logo-mark";
+import { LogoMark, Wordmark } from "@/components/marks/logo-mark";
 import { ProductIcon } from "@/components/marks/product-icon";
 import { PRODUCTS, NAV_RESOURCES, SITE } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
+
+// Routes whose hero is on a dark surface — nav should render light-on-dark
+// until the user scrolls past the hero.
+const DARK_HERO_ROUTES = [/^\/$/, /^\/products(\/|$)/];
+
+function isDarkHeroPath(pathname: string) {
+  return DARK_HERO_ROUTES.some((rx) => rx.test(pathname));
+}
 
 export function SiteNav() {
   const [scrolled, setScrolled] = React.useState(false);
@@ -29,14 +37,20 @@ export function SiteNav() {
     setOpen(null);
   }, [pathname]);
 
+  // Render light-on-dark while sitting over a dark hero AND not scrolled past it.
+  // Mobile menu open or scrolled past hero → light surface, dark text.
+  const onDarkHero = isDarkHeroPath(pathname) && !scrolled && !mobileOpen;
+
   return (
     <nav
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-[background-color,backdrop-filter,border-color]",
+        "fixed inset-x-0 top-0 z-50 transition-[background-color,backdrop-filter,border-color,color]",
         "duration-300 ease-[var(--ease-spring)]",
-        scrolled
-          ? "bg-[oklch(0.99_0.005_80_/_0.78)] backdrop-blur-xl backdrop-saturate-150 border-b border-[var(--border)]"
-          : "bg-transparent border-b border-transparent"
+        scrolled || mobileOpen
+          ? "bg-[oklch(0.99_0.005_80_/_0.85)] backdrop-blur-xl backdrop-saturate-150 border-b border-[var(--border)] text-[var(--ink)]"
+          : onDarkHero
+          ? "bg-transparent border-b border-transparent text-[var(--ink-on-dark)]"
+          : "bg-transparent border-b border-transparent text-[var(--ink)]"
       )}
       onMouseLeave={() => setOpen(null)}
     >
@@ -57,25 +71,40 @@ export function SiteNav() {
             label="Products"
             active={open === "products"}
             onEnter={() => setOpen("products")}
+            onDark={onDarkHero}
           />
-          <NavLink href="/pricing">Pricing</NavLink>
+          <NavLink href="/pricing" onDark={onDarkHero}>
+            Pricing
+          </NavLink>
           <NavTrigger
             label="Resources"
             active={open === "resources"}
             onEnter={() => setOpen("resources")}
+            onDark={onDarkHero}
           />
-          <NavLink href="/about">About</NavLink>
+          <NavLink href="/about" onDark={onDarkHero}>
+            About
+          </NavLink>
         </div>
 
         {/* Right CTAs */}
         <div className="hidden lg:flex items-center gap-3">
           <Link
             href={SITE.applyCta.href}
-            className="text-sm font-medium text-[var(--ink-muted)] hover:text-[var(--ink)] transition-colors px-2"
+            className={cn(
+              "text-sm font-medium transition-colors px-2",
+              onDarkHero
+                ? "text-[var(--ink-on-dark-muted)] hover:text-[var(--ink-on-dark)]"
+                : "text-[var(--ink-muted)] hover:text-[var(--ink)]"
+            )}
           >
             Apply
           </Link>
-          <Button asChild size="sm" variant="primary">
+          <Button
+            asChild
+            size="sm"
+            variant={onDarkHero ? "accent" : "primary"}
+          >
             <Link href={SITE.primaryCta.href}>{SITE.primaryCta.label}</Link>
           </Button>
         </div>
@@ -85,7 +114,12 @@ export function SiteNav() {
           aria-label="Toggle menu"
           aria-expanded={mobileOpen}
           onClick={() => setMobileOpen((o) => !o)}
-          className="lg:hidden h-12 w-12 inline-flex items-center justify-center rounded-full border border-[var(--border-strong)] text-[var(--ink)] active:scale-95 transition-transform"
+          className={cn(
+            "lg:hidden h-12 w-12 inline-flex items-center justify-center rounded-full border active:scale-95 transition-transform",
+            onDarkHero
+              ? "border-[oklch(1_0_0_/_0.22)] text-[var(--ink-on-dark)]"
+              : "border-[var(--border-strong)] text-[var(--ink)]"
+          )}
         >
           {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
@@ -143,13 +177,13 @@ export function SiteNav() {
                     {PRODUCTS[hover].name}
                   </span>
                   <span
-                    className="ml-auto px-3 py-1 text-xs font-mono tracking-wider uppercase rounded-full"
+                    className="ml-auto px-3 py-1 text-xs font-mono tracking-wider uppercase rounded-full whitespace-nowrap"
                     style={{
                       background: `color-mix(in oklch, var(${ProductHue(PRODUCTS[hover].slug)}) 14%, transparent)`,
                       color: `var(${ProductHue(PRODUCTS[hover].slug)})`,
                     }}
                   >
-                    {PRODUCTS[hover].metric} {PRODUCTS[hover].metricLabel}
+                    {PRODUCTS[hover].metric} · {PRODUCTS[hover].metricLabel}
                   </span>
                 </div>
                 <p className="text-[0.95rem] text-[var(--ink-muted)] leading-relaxed mb-5 text-pretty">
@@ -258,11 +292,24 @@ function ProductHue(slug: string) {
   }
 }
 
-function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
+function NavLink({
+  href,
+  children,
+  onDark,
+}: {
+  href: string;
+  children: React.ReactNode;
+  onDark?: boolean;
+}) {
   return (
     <Link
       href={href}
-      className="px-3 py-2 text-sm font-medium text-[var(--ink-muted)] hover:text-[var(--ink)] transition-colors"
+      className={cn(
+        "px-3 py-2 text-sm font-medium transition-colors",
+        onDark
+          ? "text-[var(--ink-on-dark-muted)] hover:text-[var(--ink-on-dark)]"
+          : "text-[var(--ink-muted)] hover:text-[var(--ink)]"
+      )}
     >
       {children}
     </Link>
@@ -273,10 +320,12 @@ function NavTrigger({
   label,
   active,
   onEnter,
+  onDark,
 }: {
   label: string;
   active: boolean;
   onEnter: () => void;
+  onDark?: boolean;
 }) {
   return (
     <button
@@ -287,7 +336,13 @@ function NavTrigger({
       onFocus={onEnter}
       className={cn(
         "px-3 py-2 inline-flex items-center gap-1 text-sm font-medium transition-colors rounded-md",
-        active ? "text-[var(--ink)]" : "text-[var(--ink-muted)] hover:text-[var(--ink)]"
+        onDark
+          ? active
+            ? "text-[var(--ink-on-dark)]"
+            : "text-[var(--ink-on-dark-muted)] hover:text-[var(--ink-on-dark)]"
+          : active
+          ? "text-[var(--ink)]"
+          : "text-[var(--ink-muted)] hover:text-[var(--ink)]"
       )}
     >
       {label}

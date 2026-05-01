@@ -10,20 +10,20 @@ export function ProductMockup() {
     <div
       role="img"
       aria-label="Stylized illustration of a Good, Better, Best service proposal — the customer is choosing the Better tier at $1,180."
-      className="relative w-full max-w-[520px] mx-auto"
+      className="relative w-full max-w-[480px] mx-auto"
       style={{ perspective: "1600px" }}
     >
       <div
         className="relative"
         style={{
-          transform: "rotateX(8deg) rotateY(-12deg) rotateZ(-2deg)",
+          transform: "rotateX(6deg) rotateY(-8deg) rotateZ(-1.5deg)",
           transformStyle: "preserve-3d",
         }}
       >
         {/* Glow halo */}
         <div
           aria-hidden
-          className="absolute -inset-12 rounded-full blur-3xl opacity-50"
+          className="absolute -inset-8 rounded-[var(--radius-xl)] blur-3xl opacity-45"
           style={{
             background:
               "conic-gradient(from 220deg at 50% 50% in oklch, oklch(0.78 0.16 70), oklch(0.55 0.22 305), oklch(0.62 0.24 290), oklch(0.78 0.16 70))",
@@ -133,22 +133,26 @@ export function ProductMockup() {
 
         {/* Floating sub-card (occlusion = depth, off-grid placement) */}
         <div
-          className="absolute -bottom-12 -left-10 w-44 rounded-[var(--radius)] bg-[var(--bg)] p-3"
+          className="absolute -bottom-6 -left-4 sm:-left-6 w-44 rounded-[var(--radius)] bg-[var(--bg)] p-3"
           style={{
-            transform: "translateZ(40px) rotate(-4deg)",
+            transform: "translateZ(40px) rotate(-3deg)",
             boxShadow: "0 30px 60px -20px oklch(0 0 0 / 0.4)",
           }}
         >
           <div className="text-[10px] font-mono uppercase tracking-wider text-[var(--ink-subtle)] mb-1.5">
-            Avg ticket lift
+            Tier selection
           </div>
-          <div className="font-display text-3xl font-semibold tracking-[-0.03em]" style={{
-            background: "linear-gradient(105deg in oklch, oklch(0.55 0.22 305), oklch(0.78 0.14 70))",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-          }}>
-            +37%
+          <div
+            className="font-display text-2xl font-semibold tracking-[-0.025em] leading-tight"
+            style={{
+              background:
+                "linear-gradient(105deg in oklch, oklch(0.55 0.22 305), oklch(0.78 0.14 70))",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}
+          >
+            Customers self-select up
           </div>
           <div className="mt-2 flex items-end gap-1 h-8">
             {[28, 38, 32, 56, 48, 72, 64].map((h, i) => (

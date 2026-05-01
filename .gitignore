@@ -55,3 +55,9 @@ coverage/
 
 # Project-specific (Claude Code session data — not for repo)
 .claude/projects/
+
+# Claude Code local config (settings.json has machine-specific permission rules)
+.claude/settings.json
+.claude/settings.local.json
+*.bak
+/public/integrations/

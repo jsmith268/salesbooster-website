@@ -6,9 +6,9 @@ import { ApplyForm } from "@/components/forms/apply-form";
 import { Reveal } from "@/components/ui/reveal";
 
 export const metadata: Metadata = {
-  title: "Apply for early access — SalesBooster",
+  title: "Apply for early access — SalesBooster launch",
   description:
-    "Apply for founding-customer access to SalesBooster. Limited slots for Pro and Enterprise operators.",
+    "Apply for launch access to SalesBooster. Limited slots for Pro and Enterprise operators.",
 };
 
 const COPY: Record<"pro" | "enterprise", { eyebrow: string; title: string; body: string }> = {
@@ -19,10 +19,10 @@ const COPY: Record<"pro" | "enterprise", { eyebrow: string; title: string; body:
       "Pro runs all four Boosters. We onboard a small number of new operators each month. A few questions and we'll get back to you.",
   },
   enterprise: {
-    eyebrow: "Enterprise · Founding customer",
-    title: "Apply for founding-customer access.",
+    eyebrow: "Enterprise · Launch partner",
+    title: "Apply for launch access.",
     body:
-      "For multi-brand operators, PE-backed rollups, and franchise networks. We write a custom contract, run dedicated infrastructure, and assign a named integration team. A handful of founding seats open each quarter.",
+      "For companies, equity groups, and agencies managing service across more than 10 locations. We write a custom contract, run dedicated infrastructure, and assign a named integration team. A handful of launch-partner seats open each quarter.",
   },
 };
 
@@ -74,23 +74,23 @@ export default async function ApplyPage({
               active={tier === "pro"}
               href="/apply?tier=pro"
               title="Pro"
-              note="All four products · up to 10 locations"
+              note="All four Boosters · 500 jobs / loc / mo"
             />
             <SwitchCard
               active={tier === "enterprise"}
               href="/apply?tier=enterprise"
               title="Enterprise"
-              note="Multi-brand · franchise · custom"
+              note="Companies · equity groups · agencies"
             />
           </div>
 
           <p className="mt-10 text-center text-sm text-[var(--ink-subtle)]">
-            Just want to lock pricing?{" "}
+            Just want the 50%-off launch rate?{" "}
             <Link
               href="/waitlist"
               className="font-semibold text-[var(--brand)] hover:text-[var(--brand-bright)] underline-offset-2 hover:underline"
             >
-              Join the waitlist →
+              Reserve your spot →
             </Link>
           </p>
         </div>

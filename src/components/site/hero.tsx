@@ -3,25 +3,18 @@ import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { HeroIllustration } from "./hero-illustration";
 import { ProductMockup } from "./product-mockup";
+import { LaunchCountdown } from "./launch-countdown";
 import { SITE } from "@/lib/site-config";
 
 export function Hero() {
   return (
-    <header className="relative isolate min-h-[640px] sm:min-h-[760px] lg:min-h-[860px] flex items-end overflow-hidden">
+    <header className="relative isolate min-h-[640px] sm:min-h-[760px] lg:min-h-[880px] flex items-center overflow-hidden">
       <HeroIllustration />
 
-      <div className="container-page relative z-10 pt-28 pb-20 sm:pt-40 sm:pb-32 grid gap-12 lg:gap-14 lg:grid-cols-[1.1fr_0.9fr] items-end w-full">
+      <div className="container-page relative z-10 pt-28 pb-24 sm:pt-40 sm:pb-36 lg:pb-40 grid gap-12 lg:gap-20 xl:gap-24 lg:grid-cols-[1.15fr_0.85fr] items-center w-full">
         <div className="max-w-[640px]">
           <Reveal>
-            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[oklch(1_0_0_/_0.08)] backdrop-blur-md border border-[oklch(1_0_0_/_0.14)] text-[var(--ink-on-dark)]">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full rounded-full bg-[var(--accent-bright)] opacity-70 animate-ping" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--accent)]" />
-              </span>
-              <span className="font-mono text-xs uppercase tracking-wider opacity-90">
-                {SITE.status.short} · Q3 2026
-              </span>
-            </span>
+            <LaunchCountdown variant="pill" tone="on-dark" />
           </Reveal>
 
           <Reveal delay={120}>
@@ -45,7 +38,7 @@ export function Hero() {
 
           <Reveal delay={240}>
             <p className="mt-7 max-w-xl text-lg sm:text-[1.2rem] leading-relaxed text-[var(--ink-on-dark-muted)] text-pretty">
-              The platform reads your Housecall Pro jobs and works the parts your techs don't. Bigger tickets at the door. Reviews and referrals after. Estimates pulled back from the dead. We're not selling yet — we're onboarding 25 design partners.
+              The platform connects to your existing field-service software and works the revenue moments your team can&rsquo;t be in the room for. Bigger tickets at the door. Reviews and referrals after. Estimates pulled back from the dead. Built. Live. Onboarding launch partners now.
             </p>
           </Reveal>
 
@@ -57,18 +50,39 @@ export function Hero() {
               <Button asChild size="xl" variant="glass" className="w-full sm:w-auto">
                 <Link href="/apply">Apply for early access</Link>
               </Button>
+              <Link
+                href="/roi"
+                className="text-sm font-medium text-[var(--ink-on-dark-muted)] hover:text-[var(--ink-on-dark)] underline-offset-4 hover:underline transition-colors sm:ml-1"
+              >
+                or estimate your monthly lift →
+              </Link>
             </div>
           </Reveal>
 
           <Reveal delay={480}>
-            <p className="mt-7 text-sm text-[var(--ink-on-dark-muted)] max-w-md">
-              No credit card. No demo call. Your founding price is locked the moment you join.
-            </p>
+            <ul className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-[var(--ink-on-dark-muted)] max-w-xl">
+              <li className="inline-flex items-center gap-2">
+                <span aria-hidden className="block h-1 w-1 rounded-full bg-[var(--accent)]" />
+                No credit card
+              </li>
+              <li className="inline-flex items-center gap-2">
+                <span aria-hidden className="block h-1 w-1 rounded-full bg-[var(--accent)]" />
+                No demo call
+              </li>
+              <li className="inline-flex items-center gap-2">
+                <span aria-hidden className="block h-1 w-1 rounded-full bg-[var(--accent)]" />
+                50% off — for life
+              </li>
+              <li className="inline-flex items-center gap-2">
+                <span aria-hidden className="block h-1 w-1 rounded-full bg-[var(--accent)]" />
+                Live in &lt; 48h
+              </li>
+            </ul>
           </Reveal>
         </div>
 
         {/* Product mockup illustration */}
-        <Reveal delay={300} className="hidden lg:block">
+        <Reveal delay={300} className="hidden lg:block lg:pl-4 xl:pl-0">
           <ProductMockup />
         </Reveal>
       </div>

@@ -4,38 +4,82 @@ import { SiteFooter } from "@/components/site/footer";
 import { Section, SectionHeader } from "@/components/site/section";
 import { Reveal } from "@/components/ui/reveal";
 import { CTABanner } from "@/components/site/cta-banner";
+import { FsmMark, AdjacentMark, type FsmKey } from "@/components/marks/fsm-icons";
 
 export const metadata: Metadata = {
-  title: "Integrations — Housecall Pro and the tools you already run",
+  title: "Integrations — the field-service systems we connect to",
   description:
-    "SalesBooster syncs bidirectionally with Housecall Pro and integrates with Google Reviews, Stripe, QuickBooks, and more.",
+    "SalesBooster connects directly to Housecall Pro, ServiceTitan, Jobber, and Service Fusion, plus the adjacent tools you already run.",
 };
 
-const PRIMARY = {
-  name: "Housecall Pro",
-  status: "Live · Required · MAX plan",
-  description:
-    "Pricebook, customers, jobs, estimates, invoices — all of it syncs both ways in real time. Setup takes under 48 hours from the moment you connect the account.",
-  capabilities: [
-    "Pricebook sync (instant)",
-    "Customer and address sync",
-    "Job → estimate handoff",
-    "Tier-pick → estimate push",
-    "Invoice and payment status mirror",
-    "Membership and add-on attribution",
-  ],
-};
+const FSMS: {
+  key: FsmKey;
+  name: string;
+  status: string;
+  description: string;
+  capabilities: string[];
+}[] = [
+  {
+    key: "housecall-pro",
+    name: "Housecall Pro",
+    status: "Connected",
+    description:
+      "First-class connection. Pricebook, customers, jobs, estimates, invoices — all of it syncs both ways in real time. Setup in under 48 hours.",
+    capabilities: [
+      "Bi-directional pricebook",
+      "Job → estimate handoff",
+      "Tier-pick → estimate push",
+      "Invoice & payment mirror",
+    ],
+  },
+  {
+    key: "servicetitan",
+    name: "ServiceTitan",
+    status: "Connected",
+    description:
+      "First-class connection for ServiceTitan operators. Pricebook, customers, jobs, estimates, and invoices flow both ways with full membership and add-on attribution.",
+    capabilities: [
+      "Bi-directional pricebook",
+      "Membership attribution",
+      "Add-on capture",
+      "Invoice & payment mirror",
+    ],
+  },
+  {
+    key: "jobber",
+    name: "Jobber",
+    status: "Connected",
+    description:
+      "First-class connection for Jobber. Quotes, jobs, customers, and invoices stay in sync — your techs work in Jobber, the platform works around it.",
+    capabilities: [
+      "Bi-directional pricebook",
+      "Quote → estimate handoff",
+      "Customer & address sync",
+      "Invoice & payment mirror",
+    ],
+  },
+  {
+    key: "service-fusion",
+    name: "Service Fusion",
+    status: "Connected",
+    description:
+      "First-class connection for Service Fusion shops. Service items, customers, jobs, and invoices sync bi-directionally without any CSV step.",
+    capabilities: [
+      "Bi-directional service-item sync",
+      "Job & dispatch handoff",
+      "Customer & address sync",
+      "Invoice & payment mirror",
+    ],
+  },
+];
 
 const ECOSYSTEM = [
-  { name: "Google Reviews", status: "Live", note: "Per-location routing for Review Booster" },
-  { name: "Stripe Billing", status: "Live", note: "Founding-customer subscriptions" },
-  { name: "Twilio SMS", status: "Live", note: "TCPA-compliant messaging" },
-  { name: "QuickBooks Online", status: "Q1 2027", note: "Bookkeeping export" },
-  { name: "ServiceTitan", status: "Q4 2026", note: "Pricebook + jobs sync" },
-  { name: "Jobber", status: "Q4 2026", note: "Pricebook + jobs sync" },
-  { name: "FieldEdge", status: "Roadmap", note: "On request from design partners" },
-  { name: "Slack / Teams", status: "Q1 2027", note: "Estimate-status notifications" },
-  { name: "Zapier", status: "Q1 2027", note: "Custom workflow triggers" },
+  { name: "Google Reviews", note: "Per-location routing for Review Booster" },
+  { name: "Stripe Billing", note: "Subscription and per-job billing" },
+  { name: "Twilio SMS", note: "TCPA-compliant messaging" },
+  { name: "QuickBooks Online", note: "Bookkeeping export" },
+  { name: "Slack / Teams", note: "Estimate-status notifications" },
+  { name: "Zapier", note: "Custom workflow triggers" },
 ];
 
 export default function IntegrationsPage() {
@@ -59,64 +103,66 @@ export default function IntegrationsPage() {
                     backgroundClip: "text",
                   }}
                 >
-                  FSM you already run.
+                  software you already run.
                 </em>
               </h1>
               <p className="mt-7 text-lg text-[var(--ink-muted)] max-w-2xl text-pretty">
-                No double entry. No CSV exports. No spreadsheets. The platform reads from and writes to your existing system of record.
+                Four major field-service systems are first-class today. The platform reads from and writes to your existing system of record — no double entry, no CSV exports, no spreadsheets.
               </p>
             </Reveal>
           </div>
         </header>
 
-        {/* Primary integration */}
-        <div className="container-page pb-24">
+        {/* Four FSM cards, equal weight */}
+        <div className="container-page pb-20">
           <Reveal>
-            <div
-              className="relative isolate overflow-hidden rounded-[var(--radius-xl)] p-10 sm:p-14 text-[var(--ink-on-dark)]"
-              style={{ background: "var(--surface-ink)" }}
-            >
-              <div
-                aria-hidden
-                className="absolute -top-32 -right-24 h-[420px] w-[420px] rounded-full blur-3xl opacity-50"
-                style={{
-                  background:
-                    "radial-gradient(circle, oklch(0.65 0.16 155 / 0.6), transparent 70%)",
-                }}
-              />
-              <div aria-hidden className="absolute inset-0 grain-overlay opacity-50" />
-              <div className="relative grid lg:grid-cols-[1fr_1fr] gap-10">
-                <div>
-                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[oklch(1_0_0_/_0.08)] border border-[oklch(1_0_0_/_0.16)] font-mono text-[10px] uppercase tracking-wider">
+            <p className="eyebrow mb-6">Field-service software · first-class</p>
+          </Reveal>
+          <div className="grid gap-5 sm:grid-cols-2">
+            {FSMS.map((f, i) => (
+              <Reveal key={f.key} delay={i * 60}>
+                <div className="relative h-full rounded-[var(--radius-lg)] bg-[var(--bg)] border border-[var(--border)] p-7 sm:p-9 flex flex-col">
+                  <div className="flex items-start justify-between gap-4">
+                    <FsmMark fsm={f.key} className="h-12 w-12 shrink-0" />
                     <span
-                      className="block h-1.5 w-1.5 rounded-full"
-                      style={{ background: "var(--success)" }}
-                    />
-                    Live · Required
-                  </span>
-                  <h2 className="mt-5 font-display text-5xl tracking-[-0.03em] leading-[0.96] text-balance">
-                    {PRIMARY.name}
-                  </h2>
-                  <p className="mt-4 text-[var(--ink-on-dark-muted)] text-pretty leading-relaxed max-w-md">
-                    {PRIMARY.description}
-                  </p>
-                </div>
-                <ul className="space-y-3">
-                  {PRIMARY.capabilities.map((c) => (
-                    <li
-                      key={c}
-                      className="flex items-start gap-3 text-[var(--ink-on-dark)]"
+                      className="px-2.5 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider whitespace-nowrap"
+                      style={{
+                        background: "color-mix(in oklch, var(--success) 16%, transparent)",
+                        color: "var(--success)",
+                      }}
                     >
-                      <span
-                        className="mt-1.5 block h-1.5 w-1.5 rounded-full"
-                        style={{ background: "var(--accent)" }}
-                      />
-                      <span>{c}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+                      ● {f.status}
+                    </span>
+                  </div>
+                  <h2 className="mt-6 font-display text-2xl sm:text-3xl tracking-[-0.025em] text-[var(--ink)] text-balance">
+                    {f.name}
+                  </h2>
+                  <p className="mt-3 text-[var(--ink-muted)] text-pretty leading-relaxed">
+                    {f.description}
+                  </p>
+                  <ul className="mt-6 space-y-2 grow">
+                    {f.capabilities.map((c) => (
+                      <li
+                        key={c}
+                        className="flex items-start gap-2.5 text-sm text-[var(--ink-muted)]"
+                      >
+                        <span
+                          aria-hidden
+                          className="mt-2 block h-1.5 w-1.5 shrink-0 rounded-full"
+                          style={{ background: "var(--accent)" }}
+                        />
+                        {c}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal delay={260}>
+            <p className="mt-6 text-sm text-[var(--ink-subtle)] text-pretty">
+              On a different field-service system? We run an integration sprint per launch partner. Tell us what you&rsquo;re on when you reserve your spot — most modern FSMs with an API can be on-boarded inside the first month.
+            </p>
           </Reveal>
         </div>
 
@@ -124,40 +170,28 @@ export default function IntegrationsPage() {
           <div className="container-page">
             <Reveal>
               <SectionHeader
-                eyebrow="Ecosystem"
+                eyebrow="Adjacent integrations"
                 title="What else we sync with."
-                description="Live and on the roadmap. Design partners get to vote on what ships next."
+                description="The tools that round out the workflow — connected and available."
               />
             </Reveal>
 
             <div className="mt-16 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {ECOSYSTEM.map((e, i) => {
-                const live = e.status === "Live";
-                return (
-                  <Reveal key={e.name} delay={i * 40}>
-                    <div className="rounded-[var(--radius-lg)] bg-[var(--bg)] border border-[var(--border)] p-6">
-                      <div className="flex items-baseline justify-between gap-3">
-                        <h3 className="font-display text-lg font-semibold tracking-[-0.015em]">
-                          {e.name}
-                        </h3>
-                        <span
-                          className="font-mono text-[10px] uppercase tracking-wider shrink-0"
-                          style={{
-                            color: live
-                              ? "var(--success)"
-                              : "var(--ink-subtle)",
-                          }}
-                        >
-                          {e.status}
-                        </span>
-                      </div>
-                      <p className="mt-2 text-sm text-[var(--ink-muted)] text-pretty">
+              {ECOSYSTEM.map((e, i) => (
+                <Reveal key={e.name} delay={i * 40}>
+                  <div className="rounded-[var(--radius-lg)] bg-[var(--bg)] border border-[var(--border)] p-6 flex items-start gap-4">
+                    <AdjacentMark name={e.name} className="h-10 w-10" />
+                    <div className="min-w-0 flex-1">
+                      <h3 className="font-display text-lg font-semibold tracking-[-0.015em]">
+                        {e.name}
+                      </h3>
+                      <p className="mt-1.5 text-sm text-[var(--ink-muted)] text-pretty">
                         {e.note}
                       </p>
                     </div>
-                  </Reveal>
-                );
-              })}
+                  </div>
+                </Reveal>
+              ))}
             </div>
           </div>
         </Section>

@@ -11,6 +11,7 @@ const FSM_OPTIONS = [
   "Housecall Pro",
   "ServiceTitan",
   "Jobber",
+  "Service Fusion",
   "FieldEdge",
   "Other",
   "None / paper",
@@ -40,7 +41,7 @@ export function WaitlistForm({ defaultPlan }: { defaultPlan?: string }) {
     { key: "email", label: "Where should we reach you?", hint: "Used once: to let you know when access opens.", type: "input", placeholder: "you@operator.com" },
     { key: "company", label: "Company name.", hint: "What should we call you?", type: "input", placeholder: "Sunrise HVAC" },
     { key: "role", label: "Your role.", hint: "Helps us shape the rollout for you.", type: "choice", options: ROLE_OPTIONS },
-    { key: "fsm", label: "What FSM are you on?", hint: "Housecall Pro is live today. Others are on the roadmap.", type: "choice", options: FSM_OPTIONS },
+    { key: "fsm", label: "What FSM are you on?", hint: "Housecall Pro, ServiceTitan, Jobber, and Service Fusion are first-class today. Others can be on-boarded by request.", type: "choice", options: FSM_OPTIONS },
     { key: "locations", label: "How many locations?", hint: "A rough number is fine.", type: "input", placeholder: "3" },
   ];
 
@@ -66,7 +67,7 @@ export function WaitlistForm({ defaultPlan }: { defaultPlan?: string }) {
           You're in.
         </h3>
         <p className="mt-3 text-[var(--ink-muted)] text-pretty">
-          We'll reach out when access opens for {v.company || "your company"}. Your founding price is locked from this moment on.
+          We&rsquo;ll reach out when access opens for {v.company || "your company"}. Your 50%-off launch rate is locked from this moment — for the life of your account.
         </p>
         <p className="mt-2 text-sm text-[var(--ink-subtle)]">
           Want to skip the line? <a href="/apply" className="font-semibold text-[var(--brand)] hover:text-[var(--brand-bright)] underline-offset-2 hover:underline">Apply for early access →</a>

@@ -6,9 +6,9 @@ import { WaitlistForm } from "@/components/forms/waitlist-form";
 import { Reveal } from "@/components/ui/reveal";
 
 export const metadata: Metadata = {
-  title: "Reserve your spot — SalesBooster waitlist",
+  title: "Reserve your spot — SalesBooster launch waitlist",
   description:
-    "Join the SalesBooster waitlist to lock founding-customer pricing before public launch.",
+    "Reserve your spot on the SalesBooster launch waitlist and lock 50% off public pricing — for the life of your account.",
 };
 
 export default async function WaitlistPage({
@@ -38,7 +38,7 @@ export default async function WaitlistPage({
                 Reserve your spot.
               </h1>
               <p className="mt-6 text-lg text-[var(--ink-muted)] text-pretty">
-                Five questions. No demo call. Your founding price is locked the moment you submit.
+                Five questions. No demo call. Your 50%-off launch rate locks the moment you submit — for the life of your account.
               </p>
             </Reveal>
           </div>
@@ -55,7 +55,7 @@ export default async function WaitlistPage({
               href="/apply?tier=enterprise"
               className="font-semibold text-[var(--brand)] hover:text-[var(--brand-bright)] underline-offset-2 hover:underline"
             >
-              Apply for founding-customer access →
+              Apply for launch access →
             </Link>
           </p>
         </div>

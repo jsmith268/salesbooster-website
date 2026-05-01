@@ -6,6 +6,11 @@ import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { cn } from "@/lib/utils";
 
+/**
+ * ROI sandbox — your inputs, your assumptions, your forecast.
+ * No hard-coded "industry averages". The user owns every multiplier.
+ */
+
 type Slider = {
   key: keyof Inputs;
   label: string;
@@ -13,19 +18,39 @@ type Slider = {
   min: number;
   max: number;
   step: number;
+  hint?: string;
 };
+
 type Inputs = {
   techs: number;
   jobsPerTech: number;
   avgTicket: number;
-  reviewMult: number;
+  ticketLiftPct: number;
+  recoveryPct: number;
 };
 
 const SLIDERS: Slider[] = [
   { key: "techs", label: "Active technicians", unit: "techs", min: 1, max: 50, step: 1 },
   { key: "jobsPerTech", label: "Jobs per tech / week", unit: "jobs", min: 5, max: 50, step: 1 },
   { key: "avgTicket", label: "Average ticket today", unit: "$", min: 200, max: 2000, step: 50 },
-  { key: "reviewMult", label: "Review multiplier", unit: "×", min: 1, max: 5, step: 0.1 },
+  {
+    key: "ticketLiftPct",
+    label: "Expected ticket lift you'd model",
+    unit: "%",
+    min: 0,
+    max: 50,
+    step: 1,
+    hint: "Move this to whatever you'd find believable. We don't pick it for you.",
+  },
+  {
+    key: "recoveryPct",
+    label: "Estimate-recovery rate you'd model",
+    unit: "%",
+    min: 0,
+    max: 30,
+    step: 1,
+    hint: "Share of cold estimates you'd expect to bring back.",
+  },
 ];
 
 export function ROICalculator() {
@@ -33,16 +58,20 @@ export function ROICalculator() {
     techs: 6,
     jobsPerTech: 18,
     avgTicket: 480,
-    reviewMult: 3.2,
+    ticketLiftPct: 15,
+    recoveryPct: 10,
   });
 
   const weeklyJobs = v.techs * v.jobsPerTech;
   const monthlyJobs = weeklyJobs * 4.33;
-  const ticketLift = v.avgTicket * 0.37;
-  const monthlyLift = monthlyJobs * ticketLift;
-  const recoveryLift = monthlyJobs * v.avgTicket * 0.18 * 0.15; // 18% recovery on 15% of cold estimates
-  const reviewLift = (v.reviewMult - 1) * 200; // qualitative — proxy for inbound from review velocity
-  const monthlyTotal = monthlyLift + recoveryLift + reviewLift * 50;
+
+  // Pure, user-driven math. Nothing asserted by us.
+  const ticketLift = v.avgTicket * (v.ticketLiftPct / 100);
+  const monthlyTicketLift = monthlyJobs * ticketLift;
+  // Recovery: assume 25% of jobs end with an unsold estimate (conservative shape, user can flatten by setting recovery to 0)
+  const recoveryLift =
+    monthlyJobs * 0.25 * v.avgTicket * (v.recoveryPct / 100);
+  const monthlyTotal = monthlyTicketLift + recoveryLift;
   const annualTotal = monthlyTotal * 12;
 
   return (
@@ -89,6 +118,11 @@ export function ROICalculator() {
                     background: `linear-gradient(to right, var(--ink) 0%, var(--ink) ${pct}%, var(--border-strong) ${pct}%, var(--border-strong) 100%)`,
                   }}
                 />
+                {s.hint && (
+                  <p className="mt-2 text-xs text-[var(--ink-subtle)] text-pretty">
+                    {s.hint}
+                  </p>
+                )}
               </label>
             );
           })}
@@ -106,27 +140,32 @@ export function ROICalculator() {
           <div aria-hidden className="absolute inset-0 grain-overlay opacity-50" />
           <div className="relative">
             <p className="eyebrow text-[var(--ink-on-dark-muted)]">
-              Projected monthly lift
+              Your modelled monthly lift
             </p>
             <p className="mt-3 font-display text-6xl sm:text-7xl font-semibold tracking-[-0.04em] tabular-nums">
               ${Math.round(monthlyTotal).toLocaleString()}
             </p>
             <p className="mt-1 text-sm text-[var(--ink-on-dark-muted)]">
-              ≈ <span className="tabular-nums">${Math.round(annualTotal).toLocaleString()}</span> per year
+              ≈ <span className="tabular-nums">${Math.round(annualTotal).toLocaleString()}</span> per year, on the assumptions you set
             </p>
 
             <div className="mt-8 grid gap-3 text-sm">
-              <Row label="Ticket lift (37%)" value={`+$${Math.round(monthlyLift).toLocaleString()}/mo`} />
-              <Row label="Estimate recovery" value={`+$${Math.round(recoveryLift).toLocaleString()}/mo`} />
-              <Row label="Review-driven inbound" value={`+$${Math.round(reviewLift * 50).toLocaleString()}/mo`} />
+              <Row
+                label={`Ticket lift (${v.ticketLiftPct}% on ${Math.round(monthlyJobs).toLocaleString()} jobs)`}
+                value={`+$${Math.round(monthlyTicketLift).toLocaleString()}/mo`}
+              />
+              <Row
+                label={`Estimate recovery (${v.recoveryPct}% of cold estimates)`}
+                value={`+$${Math.round(recoveryLift).toLocaleString()}/mo`}
+              />
             </div>
 
             <Button asChild size="lg" variant="accent" className="mt-9 w-full sm:w-auto">
-              <Link href="/waitlist?source=roi">Reserve your spot</Link>
+              <Link href="/waitlist?source=roi">Reserve your launch spot</Link>
             </Button>
 
-            <p className="mt-4 text-xs text-[var(--ink-on-dark-muted)]">
-              Estimates only — based on observed performance across early operators. Your numbers will vary.
+            <p className="mt-4 text-xs text-[var(--ink-on-dark-muted)] text-pretty">
+              This is a sandbox, not a guarantee. Every multiplier above is your assumption. The platform creates the mechanism — bigger tickets, more reviews, tracked referrals, recovered estimates — but the size of the lift is a function of how aggressively your team uses it.
             </p>
           </div>
         </div>
@@ -137,9 +176,9 @@ export function ROICalculator() {
 
 function Row({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex items-center justify-between border-t border-[oklch(1_0_0_/_0.08)] pt-3">
-      <span className="text-[var(--ink-on-dark-muted)]">{label}</span>
-      <span className="font-medium tabular-nums">{value}</span>
+    <div className="flex items-center justify-between border-t border-[oklch(1_0_0_/_0.08)] pt-3 gap-3">
+      <span className="text-[var(--ink-on-dark-muted)] text-pretty">{label}</span>
+      <span className="font-medium tabular-nums whitespace-nowrap">{value}</span>
     </div>
   );
 }

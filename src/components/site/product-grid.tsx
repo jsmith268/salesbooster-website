@@ -69,16 +69,21 @@ export function ProductGrid({ omit }: { omit?: Slug } = {}) {
                 {p.short}
               </p>
 
-              <div className="mt-auto pt-8 flex items-baseline gap-2">
-                <span
-                  className="font-display text-3xl font-semibold tracking-[-0.02em]"
-                  style={{ color: `var(${hueOf(p.slug as Slug)})` }}
-                >
-                  {p.metric}
-                </span>
-                <span className="text-sm text-[var(--ink-subtle)]">
-                  {p.metricLabel}
-                </span>
+              <div className="mt-auto pt-8">
+                <div className="flex items-baseline gap-2 flex-wrap">
+                  <span
+                    className="font-display text-2xl font-semibold tracking-[-0.02em]"
+                    style={{ color: `var(${hueOf(p.slug as Slug)})` }}
+                  >
+                    {p.metric}
+                  </span>
+                  <span className="text-sm text-[var(--ink-subtle)]">
+                    {p.metricLabel}
+                  </span>
+                </div>
+                <p className="mt-2 text-xs text-[var(--ink-subtle)] text-pretty leading-relaxed">
+                  {p.mechanism}
+                </p>
               </div>
             </div>
           </Link>

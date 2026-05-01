@@ -37,11 +37,14 @@ export const metadata: Metadata = {
     template: "%s · SalesBooster",
   },
   description:
-    "Turn every job into three revenue moments — bigger tickets, more reviews, tracked referrals, recovered estimates. Joining a small group of design partners ahead of public launch.",
+    "Turn every job into three revenue moments — bigger tickets, more reviews, tracked referrals, recovered estimates. Built and live on top of your existing field-service software. Limited-time launch pricing for the first cohort.",
   keywords: [
     "home services revenue",
-    "Housecall Pro upsell",
-    "field service sales",
+    "field service software upsell",
+    "Housecall Pro integration",
+    "ServiceTitan integration",
+    "Jobber integration",
+    "Service Fusion integration",
     "good better best",
     "sales booster",
   ],

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { BrandLockup } from "@/components/marks/logo-mark";
 import { PRODUCTS, SITE } from "@/lib/site-config";
+import { LaunchCountdown } from "./launch-countdown";
 
 const COLUMNS = [
   {
@@ -51,18 +52,14 @@ export function SiteFooter() {
 
       <div className="container-page relative z-10 py-20">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_3fr]">
-          <div className="max-w-sm">
-            <BrandLockup tone="on-dark" />
+          <div className="max-w-sm text-[var(--ink-on-dark)]">
+            <BrandLockup />
             <p className="mt-5 text-sm text-[var(--ink-on-dark-muted)] leading-relaxed text-pretty">
-              {SITE.tagline} Onboarding a small group of design partners ahead of public launch.
+              {SITE.tagline} Built. Live. Selecting launch partners for the first cohort.
             </p>
-            <p className="mt-6 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-[var(--ink-on-dark-muted)]">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full rounded-full bg-[var(--accent)] opacity-70 animate-ping" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
-              </span>
-              {SITE.status.label}
-            </p>
+            <div className="mt-6">
+              <LaunchCountdown variant="pill" tone="on-dark" />
+            </div>
           </div>
 
           <div className="grid grid-cols-2 gap-10 sm:grid-cols-4">

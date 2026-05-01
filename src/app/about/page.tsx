@@ -26,7 +26,7 @@ const PRINCIPLES = [
   },
   {
     h: "We won't quote a number we haven't measured.",
-    p: "If something's beta, we say so. If something's roadmap, we say so. The 37% lift is what early operators are seeing, not what we hope they'll see.",
+    p: "If something's beta, we say so. If something's roadmap, we say so. The mechanism — three priced options, automated follow-up, sentiment-routed reviews — is real. The size of the lift depends on how aggressively you use it.",
   },
 ];
 
@@ -94,17 +94,17 @@ export default function AboutPage() {
             <Reveal>
               <p className="eyebrow">Where we are</p>
               <h2 className="mt-3 font-display text-4xl sm:text-5xl tracking-[-0.025em] text-balance leading-[0.96]">
-                Pre-launch. By choice.
+                Built. Live. Selecting launch partners.
               </h2>
               <div className="mt-7 space-y-4 text-[1.075rem] leading-relaxed text-[var(--ink-muted)] text-pretty">
                 <p>
-                  We could turn sales on right now. We're not going to. Software gets graded on the worst day of the worst customer, and the only way to get to launch-grade is to run it with a small group of partners who'll tell us the truth.
+                  The product is in production. It connects directly to your customers, jobs, estimates, and invoices through your existing field-service software, so we hold the bar high on stability, security, and accuracy. We&rsquo;ve held it there in real shops for months.
                 </p>
                 <p>
-                  So that's where we are. Twenty-five design partners across HVAC, plumbing, electrical, and garage door. The waitlist holds your founding price. The application is for operators who want to be in the next cohort.
+                  For our public launch, we&rsquo;re selecting a small group of operators across HVAC, plumbing, electrical, and garage door. Launch partners get dedicated onboarding for their trade and FSM, a direct line to the team, and 50% off public pricing — locked for the life of the account.
                 </p>
                 <p>
-                  When public sales open, prices go up. Founding customers stay where they were the day they signed.
+                  The waitlist secures your launch-rate spot. The application is for operators who want priority placement in the next cohort. Once the launch group is set, public access opens and pricing rises.
                 </p>
               </div>
             </Reveal>

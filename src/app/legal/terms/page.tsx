@@ -14,13 +14,13 @@ export default function Terms() {
         </h1>
         <div className="mt-10 space-y-5 text-[var(--ink-muted)] text-pretty leading-relaxed">
           <p>
-            This website is informational. SalesBooster is in pre-launch. Nothing on this site is an offer to sell, a contract, or a binding commitment to deliver software by a specific date.
+            This website is informational. Nothing on this site is an offer to sell, a contract, or a binding commitment to deliver software by a specific date.
           </p>
           <p>
-            Joining the waitlist or submitting an application is an expression of interest. Founding-customer pricing is offered in good faith to operators we onboard before public launch and is documented in a separate written agreement.
+            Joining the waitlist or submitting an application is an expression of interest. Limited-time launch pricing is offered in good faith to operators we onboard during the launch cohort and is documented in a separate written agreement.
           </p>
           <p>
-            We will publish full terms of service before public launch.
+            Full terms of service take effect at the time you sign a service agreement with us.
           </p>
         </div>
       </main>

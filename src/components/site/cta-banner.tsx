@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { SITE } from "@/lib/site-config";
+import { LaunchCountdown } from "./launch-countdown";
 
 export function CTABanner() {
   return (
@@ -30,22 +31,25 @@ export function CTABanner() {
 
         <div className="relative z-10 max-w-3xl">
           <p className="eyebrow text-[var(--ink-on-dark-muted)]">
-            Founding-customer access
+            Launch access
           </p>
           <h2 className="mt-4 font-display text-balance leading-[0.94] tracking-[-0.035em] text-4xl sm:text-5xl lg:text-6xl">
-            We're not selling yet.{" "}
+            Built for operators.{" "}
             <em className="not-italic" style={{
               background: "linear-gradient(105deg in oklch, oklch(0.85 0.16 75), oklch(0.78 0.20 50))",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
             }}>
-              We're picking partners.
+              Reserved for a select few.
             </em>
           </h2>
           <p className="mt-6 text-lg sm:text-xl text-[var(--ink-on-dark-muted)] text-pretty max-w-2xl">
-            Two ways in. Join the waitlist and your founding price is locked. Apply, and we'll consider you for the next design-partner cohort.
+            Two ways in. Reserve your spot on the waitlist and your launch price locks at 50% off — for life. Apply for early access and we&rsquo;ll consider you for the next cohort.
           </p>
+          <div className="mt-7">
+            <LaunchCountdown variant="block" tone="on-dark" />
+          </div>
           <div className="mt-9 flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3 sm:gap-4">
             <Button asChild size="xl" variant="accent" className="w-full sm:w-auto">
               <Link href={SITE.primaryCta.href}>{SITE.primaryCta.label}</Link>
