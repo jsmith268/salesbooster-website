@@ -19,7 +19,7 @@ export function Hero() {
 
           <Reveal delay={120}>
             <h1 className="mt-8 font-display tracking-[-0.04em] leading-[0.94] text-[clamp(2.75rem,6.4vw,5.6rem)] text-[var(--ink-on-dark)] text-balance">
-              Every job is{" "}
+              Bigger tickets. More reviews. Tracked referrals.{" "}
               <em
                 className="not-italic font-display"
                 style={{
@@ -30,15 +30,14 @@ export function Hero() {
                   backgroundClip: "text",
                 }}
               >
-                three revenue moments.
-              </em>{" "}
-              You're capturing one.
+                Recovered estimates.
+              </em>
             </h1>
           </Reveal>
 
           <Reveal delay={240}>
             <p className="mt-7 max-w-xl text-lg sm:text-[1.2rem] leading-relaxed text-[var(--ink-on-dark-muted)] text-pretty">
-              The platform connects to your existing field-service software and works the revenue moments your team can&rsquo;t be in the room for. Bigger tickets at the door. Reviews and referrals after. Estimates pulled back from the dead. Built. Running in production. Join us as a launch partner.
+              The platform reads every job and works what your team can&rsquo;t get to: bigger tickets at the door, reviews and referrals after, cold estimates that don&rsquo;t die. Plugs into the field-service software you already run. Built by operators, for operators. Join us as a launch partner today.
             </p>
           </Reveal>
 
