@@ -1,6 +1,6 @@
 /**
  * Source of truth for all content.
- * Voice: operator-grade, evidence-and-mechanism based. Built. Live. Selecting launch partners.
+ * Voice: operator-grade, evidence-and-mechanism based. Built. Live. Inviting partners.
  */
 
 export type ValueProp = {

@@ -14,7 +14,7 @@ export function TrustBlock() {
           <div>
             <p className="eyebrow">Why this is different</p>
             <h2 className="mt-4 font-display text-4xl sm:text-5xl lg:text-6xl tracking-[-0.03em] leading-[0.96] text-[var(--ink)] text-balance">
-              Built. Live. Picking launch partners.
+              Built. Live. Join us as a launch partner.
             </h2>
           </div>
 

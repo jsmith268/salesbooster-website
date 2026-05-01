@@ -94,7 +94,7 @@ export default function AboutPage() {
             <Reveal>
               <p className="eyebrow">Where we are</p>
               <h2 className="mt-3 font-display text-4xl sm:text-5xl tracking-[-0.025em] text-balance leading-[0.96]">
-                Built. Live. Selecting launch partners.
+                Built. Live. Join us as a launch partner.
               </h2>
               <div className="mt-7 space-y-4 text-[1.075rem] leading-relaxed text-[var(--ink-muted)] text-pretty">
                 <p>

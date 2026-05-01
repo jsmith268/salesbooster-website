@@ -34,18 +34,18 @@ export function CTABanner() {
             Launch access
           </p>
           <h2 className="mt-4 font-display text-balance leading-[0.94] tracking-[-0.035em] text-4xl sm:text-5xl lg:text-6xl">
-            Built for operators.{" "}
+            Built by operators, for operators.{" "}
             <em className="not-italic" style={{
               background: "linear-gradient(105deg in oklch, oklch(0.85 0.16 75), oklch(0.78 0.20 50))",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
             }}>
-              Reserved for a select few.
+              Join now for early access.
             </em>
           </h2>
           <p className="mt-6 text-lg sm:text-xl text-[var(--ink-on-dark-muted)] text-pretty max-w-2xl">
-            Two ways in. Reserve your spot on the waitlist and your launch price locks at 50% off — for life. Apply for early access and we&rsquo;ll consider you for the next cohort.
+            Two ways in. Reserve your spot on the waitlist and your launch price locks at 50% off — for life. Or apply for early access and we&rsquo;ll bring you into the next cohort.
           </p>
           <div className="mt-7">
             <LaunchCountdown variant="block" tone="on-dark" />

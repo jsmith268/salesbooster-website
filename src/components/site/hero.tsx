@@ -38,7 +38,7 @@ export function Hero() {
 
           <Reveal delay={240}>
             <p className="mt-7 max-w-xl text-lg sm:text-[1.2rem] leading-relaxed text-[var(--ink-on-dark-muted)] text-pretty">
-              The platform connects to your existing field-service software and works the revenue moments your team can&rsquo;t be in the room for. Bigger tickets at the door. Reviews and referrals after. Estimates pulled back from the dead. Built. Live. Onboarding launch partners now.
+              The platform connects to your existing field-service software and works the revenue moments your team can&rsquo;t be in the room for. Bigger tickets at the door. Reviews and referrals after. Estimates pulled back from the dead. Built. Running in production. Join us as a launch partner.
             </p>
           </Reveal>
 

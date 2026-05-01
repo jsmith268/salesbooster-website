@@ -55,7 +55,7 @@ export function SiteFooter() {
           <div className="max-w-sm text-[var(--ink-on-dark)]">
             <BrandLockup />
             <p className="mt-5 text-sm text-[var(--ink-on-dark-muted)] leading-relaxed text-pretty">
-              {SITE.tagline} Built. Live. Selecting launch partners for the first cohort.
+              {SITE.tagline} Built. Live. Join us as a launch partner.
             </p>
             <div className="mt-6">
               <LaunchCountdown variant="pill" tone="on-dark" />
@@ -90,7 +90,7 @@ export function SiteFooter() {
             © {new Date().getFullYear()} SalesBooster, Inc. All rights reserved.
           </p>
           <p className="text-xs text-[var(--ink-on-dark-muted)] font-mono uppercase tracking-wider">
-            Built for operators
+            Built by operators
           </p>
         </div>
       </div>
